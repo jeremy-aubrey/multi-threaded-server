@@ -185,14 +185,12 @@ public class Server {
 		String result = "";
 		
 		// validation 
-		if(data.length < 3 || data.length > 3) {
-			result = "Must enter 3 integers";
+		if(data.length < 2 || data.length > 2) {
+			result = "Must enter 2 integers";
 		} else if (data[0] <= 0 || data[1] <= 0 || data[2] <= 0) {
 			result = "All integers must be greater than zero.";
 		} else if(data[0] >= data[1]) {
 			result = "The first integer must be less than the second";
-		} else if (data[2] != 1 && data[2] != 2) {
-			result = "The third integer must be 1 or 2";
 		} else {
 		
 		// get statistics
