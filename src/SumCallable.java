@@ -35,8 +35,8 @@ public class SumCallable implements Callable<Integer>{
 	// constructor
 	public SumCallable(Future<List<Integer>> data) {
 		
-		try {
-			// get Intstream from List data
+		try { // get Intstream from List data
+			
 			this.data = data.get()
 					.stream()
 					.mapToInt(Integer::intValue);

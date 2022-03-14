@@ -44,34 +44,45 @@ public class PrimeCallable implements Callable<List<Integer>> {
     //
     //  Method:       isPrime (Non Static)
     // 
-    //  Description:  Returns a boolean value based on whether a number
-    //                is prime.
+    //  Description:  This method determines whether a positive integer is
+    //                a prime number.  It returns true if the integer a prime
+    //                number, and false if it is not.
     //
-    //  Parameters:   int
+    //  Parameters:   A Positive Integer
     //
     //  Returns:      boolean
     //
     //**************************************************************
-	private boolean isPrime(int num) {
+	public boolean isPrime(int number) {
 		
-		boolean isPrime = false;
+		boolean rtnValue = true;
+	  
+		if (number < 2) {           // Integers < 2 cannot be prime
+         rtnValue = false;
+		} else if (number == 2) {     // Special case: 2 is the only even prime number
+         rtnValue = true;
+		} else if (number % 2 == 0) { // Other even numbers are not prime
+         rtnValue = false;
+		} else {
+         // Test odd divisors up to the square root of number
+         // If any of them divide evenly into it, then number is not prime
+         for (int divisor = 3; divisor <= Math.sqrt(number); divisor += 2) {
+        	 
+		     if (number % divisor == 0)
+                rtnValue = false;
+         }
+      }
+      
+		return rtnValue;
 		
-		if (num <= 2) {
-			isPrime = num == 2;
-		} else { 
-			isPrime = (num % 2) != 0 && IntStream.rangeClosed(3, (int) Math.sqrt(num))
-					.allMatch(i -> num % i != 0);
-		}
-		
-		return isPrime;
-		
-	}// end isPrime method
+   }// end isPrime method
 
     //***************************************************************
     //
     //  Method:       call (Non Static)
     // 
-    //  Description:  
+    //  Description:  Creates a List of prime Integers between the range 
+    //                of the start and end fields.
     //
     //  Parameters:   None
     //
@@ -82,9 +93,9 @@ public class PrimeCallable implements Callable<List<Integer>> {
 	public List<Integer> call() throws Exception {
 		
 		List<Integer> primes = IntStream.rangeClosed(start, end)
-		.filter(num -> isPrime(num))
-		.boxed()
-		.collect(Collectors.toList());
+		.filter(num -> isPrime(num))   // filter out non-prime numbers
+		.boxed()                       // box each int to Integer
+		.collect(Collectors.toList()); // convert to List<Integer>
 		
 		return primes;
 		

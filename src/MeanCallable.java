@@ -36,9 +36,9 @@ public class MeanCallable implements Callable<Double>{
 	// constructor
 	public MeanCallable(Future<List<Integer>> data) {
 		
-		try {
-			// get Intstream from List data
-			this.data = data.get()
+		try { // get Intstream from List data
+			
+			this.data = data.get() 
 					.stream()
 					.mapToInt(Integer::intValue);
 			

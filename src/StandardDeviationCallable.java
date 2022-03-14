@@ -37,8 +37,8 @@ public class StandardDeviationCallable implements Callable<Double>{
 	// constructor
 	public StandardDeviationCallable(Future<List<Integer>> data, Future<Double> mean) {
 		
-		try {
-			// get Intstream from List data
+		try { // get Intstream from List data
+			
 			this.data = data.get()
 					.stream()
 					.mapToInt(Integer::intValue);
