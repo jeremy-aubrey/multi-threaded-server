@@ -204,11 +204,12 @@ public class Server {
 				// get statistics
 				Future<List<Integer>> primesList = 	pool.submit(new PrimeCallable(data[0], data[1]));
 				String primes = primesList.get().toString();
+				Future<Integer> sum = pool.submit(new SumCallable(primesList)); 
 				
 				// format results
 				result = String.format("%s%s%n%-20s %s%n%-20s %s%n%-20s %s%n",
 						"Primes: ", primes,
-						"Sum: ", 0, 
+						"Sum: ", sum.get(), 
 						"Mean: ", 0,
 						"Standard Deviation: ", String.format("%.2f", 0.0));
 				
