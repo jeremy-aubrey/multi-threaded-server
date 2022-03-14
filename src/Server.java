@@ -1,3 +1,5 @@
+//********************************************************************
+//
 //  Author:        Jeremy Aubrey
 //
 //  Program #:     5
@@ -6,7 +8,7 @@
 //
 //  Course:        COSC 4301 - Modern Programming
 //
-//  Due Date:      03/06/2022
+//  Due Date:      03/13/2022
 //
 //  Instructor:    Fred Kumi 
 //
@@ -216,7 +218,7 @@ public class Server {
     //  Description:  Submits work (statistics calculations) to thread 
     //                pool and formats the results.
     //
-    //  Parameters:   int[]
+    //  Parameters:   int[] (range)
     //
     //  Returns:      String
     //

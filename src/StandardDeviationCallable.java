@@ -30,8 +30,8 @@ import java.util.stream.IntStream;
 
 public class StandardDeviationCallable implements Callable<Double>{
 
-	IntStream data;
-	double mean;
+	IntStream data; 
+	double mean;   
 	int count;
 	
 	// constructor
@@ -70,6 +70,7 @@ public class StandardDeviationCallable implements Callable<Double>{
     //**************************************************************
 	@Override
 	public Double call() throws Exception {
+		
 		double sumOfSquares = data.mapToDouble(num -> Double.valueOf(num)) // to double
 				.map(num -> Math.pow((num - mean), 2)) // square distance to mean
 				.sum(); // sum squares

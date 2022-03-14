@@ -29,8 +29,8 @@ import java.util.stream.IntStream;
 
 public class PrimeCallable implements Callable<List<Integer>> {
 
-	int start;
-	int end;
+	int start; // starting value
+	int end;   // ending value
 
 	// constructor
 	public PrimeCallable(int start, int end) {
