@@ -23,7 +23,13 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.List;
 import java.util.OptionalDouble;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.stream.IntStream;
 
 public class Server {
@@ -183,62 +189,38 @@ public class Server {
 	public String getStatisticsOrError(int[] data) {
 		
 		String result = "";
+		ExecutorService pool = Executors.newFixedThreadPool(3); // fixed at 3
 		
 		// validation 
 		if(data.length < 2 || data.length > 2) {
 			result = "Must enter 2 integers";
-		} else if (data[0] <= 0 || data[1] <= 0 || data[2] <= 0) {
+		} else if (data[0] <= 0 || data[1] <= 0) {
 			result = "All integers must be greater than zero.";
 		} else if(data[0] >= data[1]) {
 			result = "The first integer must be less than the second";
 		} else {
 		
-		// get statistics
-		int sum = getSum(getReducedData(data));
-		double mean = getMean(getReducedData(data));
-		int count = (int)getReducedData(data).count();
-		double standardDeviation = getStandardDeviation(getReducedData(data), mean, count);
-			
-		// format results
-		result = String.format("%-20s %s%n%-20s %s%n%-20s %s%n", 
-				"Sum: ", sum, 
-				"Mean: ", mean,
-				"Standard Deviation: ", String.format("%.2f", standardDeviation));
+			try {
+				// get statistics
+				Future<List<Integer>> primesList = 	pool.submit(new PrimeCallable(data[0], data[1]));
+				String primes = primesList.get().toString();
+				
+				// format results
+				result = String.format("%s%s%n%-20s %s%n%-20s %s%n%-20s %s%n",
+						"Primes: ", primes,
+						"Sum: ", 0, 
+						"Mean: ", 0,
+						"Standard Deviation: ", String.format("%.2f", 0.0));
+				
+			} catch (InterruptedException | ExecutionException | CancellationException e) {
+				
+				System.out.println(e.getMessage());
+			}
 		}
 		
 		return result;
 		
 	}// end getStatisticsOrError method
-	
-    //***************************************************************
-    //
-    //  Method:       getReducedError (Non Static)
-    // 
-    //  Description:  Returns an IntStream of either the even or odd numbers
-    //                from the int[] based on the third element. 
-    //
-    //  Parameters:   int[]
-    //
-    //  Returns:      IntStream
-    //
-    //**************************************************************
-	public IntStream getReducedData(int[] data) {
-		
-		IntStream reducedData;
-		
-		if(data[2] % 2 == 0) { // get evens
-			
-			reducedData = IntStream.rangeClosed(data[0], data[1])
-					.filter(num -> num % 2 == 0); //filter out odds
-
-		} else { // get odds
-			reducedData = IntStream.rangeClosed(data[0], data[1])
-					.filter(num -> num % 2 == 1); //filter out evens
-		}
-		
-		return reducedData;
-		
-	}// end getReducedData
 	
     //***************************************************************
     //
