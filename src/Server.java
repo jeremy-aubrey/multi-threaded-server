@@ -1,6 +1,6 @@
 //  Author:        Jeremy Aubrey
 //
-//  Program #:     4
+//  Program #:     5
 //
 //  File Name:     Server.java
 //
@@ -10,10 +10,11 @@
 //
 //  Instructor:    Fred Kumi 
 //
-//  Description:   A server that accepts integer data from a client 
-//                 and generates statistics (sum, mean, and standard
-//                 deviation). Upon client termination the server 
-//                 resumes listening for more clients connections.
+//  Description:   A multi-threaded server that accepts integer data 
+//                 from a client and generates statistics (sum, mean, 
+//                 and standard deviation) based on the prime numbers 
+//                 within the range of the integers. Upon client termination 
+//                 the server resumes listening for more clients connections.
 //
 //********************************************************************
 
@@ -24,13 +25,11 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
-import java.util.OptionalDouble;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.stream.IntStream;
 
 public class Server {
 	
@@ -181,8 +180,8 @@ public class Server {
     //
     //  Method:       getStatisticsOrError (Non Static)
     // 
-    //  Description:  Validates data and gets statistics or returns 
-    //                an error message to the client.
+    //  Description:  Validates data and submits to getStatistics method 
+    //                or returns an error message to the client if invalid.
     //
     //  Parameters:   int[]
     //
@@ -264,7 +263,7 @@ public class Server {
     {
        System.out.println("Name:    Jeremy Aubrey");
        System.out.println("Course:  COSC 4302 Modern Programming");
-       System.out.println("Program: 4");
+       System.out.println("Program: 5");
 
     } // end developerInfo method
     
