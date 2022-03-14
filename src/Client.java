@@ -1,18 +1,19 @@
 //  Author:        Jeremy Aubrey
 //
-//  Program #:     4
+//  Program #:     5
 //
 //  File Name:     Client.java
 //
 //  Course:        COSC 4301 - Modern Programming
 //
-//  Due Date:      03/06/2022
+//  Due Date:      03/13/2022
 //
 //  Instructor:    Fred Kumi 
 //
 //  Description:   A client that sends integer data to a server in 
 //                 order to obtain statistics (sum, mean, and standard
-//                 deviation).
+//                 deviation) based on the prime numbers between the
+//                 integers.
 //
 //********************************************************************
 
@@ -111,7 +112,7 @@ public class Client {
 			
 			do { // send requests until user quits
 				
-				System.out.println("Enter 3 integers: ");
+				System.out.println("Enter 2 integers: ");
 				request = scanner.nextLine().toLowerCase(); // get user input
 				writer.println(request); // send input (request) to server
 				
@@ -156,9 +157,8 @@ public class Client {
 		
 		System.out.println("\n[ INSTRUCTIONS ]");
 		System.out.println("----------------------------------------------");
-		System.out.println("Enter 3 integers seperated by a space.");
+		System.out.println("Enter 2 integers seperated by a space.");
 		System.out.println("The first integer must be less than the second.");
-		System.out.println("The third integer must be a 1 (odd) or 2 (even).");
 		System.out.println("All integers must be greater than zero.");
 		System.out.println("Enter 'bye' to quit");
 		System.out.println("----------------------------------------------");
@@ -179,8 +179,8 @@ public class Client {
     public void developerInfo()
     {
        System.out.println("Name:    Jeremy Aubrey");
-       System.out.println("Course:  COSC 4302 Modern Programming");
-       System.out.println("Program: 4");
+       System.out.println("Course:  COSC 4301 Modern Programming");
+       System.out.println("Program: 5");
 
     } // end developerInfo method
     
