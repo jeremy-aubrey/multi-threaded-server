@@ -22,6 +22,18 @@ public class SumCallable implements Callable<Integer>{
 		}
 	}
 	
+    //***************************************************************
+    //
+    //  Method:       call (Non Static)
+    // 
+    //  Description:  Uses terminal sum method on IntStream to obtain 
+    //                sum.
+    //
+    //  Parameters:   None
+    //
+    //  Returns:      Integer
+    //
+    //**************************************************************
 	@Override
 	public Integer call() throws Exception {
 		Integer sum = 0;

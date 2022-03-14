@@ -23,6 +23,18 @@ public class MeanCallable implements Callable<Double>{
 		}
 	}
 	
+    //***************************************************************
+    //
+    //  Method:       call (Non Static)
+    // 
+    //  Description:  Uses terminal average method on IntStream to obtain 
+    //                mean.
+    //
+    //  Parameters:   None
+    //
+    //  Returns:      Double
+    //
+    //**************************************************************
 	@Override
 	public Double call() throws Exception {
 		

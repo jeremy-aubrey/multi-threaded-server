@@ -210,6 +210,18 @@ public class Server {
 		
 	}// end getStatisticsOrError method
 	
+    //***************************************************************
+    //
+    //  Method:       getStatistics (Non Static)
+    // 
+    //  Description:  Submits work (statistics calculations) to thread 
+    //                pool and formats the results.
+    //
+    //  Parameters:   int[]
+    //
+    //  Returns:      String
+    //
+    //**************************************************************
 	public String getStatistics(int[] data) {
 		
 		String results = "";
@@ -235,76 +247,7 @@ public class Server {
 		
 		return results;
 		
-	}
-	
-    //***************************************************************
-    //
-    //  Method:       getSum (Non Static)
-    // 
-    //  Description:  Uses terminal sum method on IntStream to obtain 
-    //                sum.
-    //
-    //  Parameters:   IntStream
-    //
-    //  Returns:      int
-    //
-    //**************************************************************
-	public int getSum(IntStream data) {
-		
-		return data.sum();
-		
-	}// end getSum method
-	
-    //***************************************************************
-    //
-    //  Method:       getMean (Non Static)
-    // 
-    //  Description:  Uses terminal average method on IntStream to obtain 
-    //                mean.
-    //
-    //  Parameters:   IntStream
-    //
-    //  Returns:      double
-    //
-    //**************************************************************
-	public double getMean(IntStream data) {
-		
-		double mean = 0;
-		OptionalDouble result = data.average();
-		
-		if(result.isPresent()) {
-			mean = result.getAsDouble(); // get double value
-		}
-		
-		return mean;
-		
-	}// end getMean method
-	
-	
-    //***************************************************************
-    //
-    //  Method:       getStandardDeviation (Non Static)
-    // 
-    //  Description:  Maps each int to a double, each double to the square
-    //                of its distance to the mean, sums the squares, then 
-    //                gets the square root of the sum divided by the count.
-    //                Uses previously calculated mean to prevent unnecessary
-    //                calculations. 
-    //
-    //  Parameters:   IntStream, double, int
-    //
-    //  Returns:      double
-    //
-    //**************************************************************
-	public double getStandardDeviation(IntStream data, double mean, int count) {
-
-		double sumOfSquares = data.mapToDouble(num -> Double.valueOf(num)) // to double
-				.map(num -> Math.pow((num - mean), 2)) // square distance to mean
-				.sum(); // sum squares
-		
-		return Math.sqrt(sumOfSquares / count); // get square root of sum / count 
-		
-	}// end getStandardDeviation method
+	}// end getStatistics method
 	
     //***************************************************************
     //
