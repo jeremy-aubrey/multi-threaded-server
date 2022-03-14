@@ -196,11 +196,11 @@ public class Server {
 		
 		// validation 
 		if(data.length < 2 || data.length > 2) {
-			result = "Must enter 2 integers";
+			result = "Must enter 2 integers.\n";
 		} else if (data[0] <= 0 || data[1] <= 0) {
-			result = "All integers must be greater than zero.";
+			result = "All integers must be greater than zero.\n";
 		} else if(data[0] >= data[1]) {
-			result = "The first integer must be less than the second";
+			result = "The first integer must be less than the second.\n";
 		} else {
 		
 			// data is valid, get statistics
@@ -264,7 +264,7 @@ public class Server {
     public void developerInfo()
     {
        System.out.println("Name:    Jeremy Aubrey");
-       System.out.println("Course:  COSC 4302 Modern Programming");
+       System.out.println("Course:  COSC 4301 Modern Programming");
        System.out.println("Program: 5");
 
     } // end developerInfo method
