@@ -206,13 +206,14 @@ public class Server {
 				String primes = primesList.get().toString();
 				Future<Integer> sum = pool.submit(new SumCallable(primesList)); 
 				Future<Double> mean = pool.submit(new MeanCallable(primesList));
+				Future<Double> standardDev = pool.submit(new StandardDeviationCallable(primesList, mean));
 				
 				// format results
-				result = String.format("%s%s%n%-20s %s%n%-20s %s%n%-20s %s%n",
+				result = String.format("%-21s%s%n%-20s %s%n%-20s %s%n%-20s %s%n",
 						"Primes: ", primes,
 						"Sum: ", sum.get(), 
 						"Mean: ", String.format("%.2f", mean.get()),
-						"Standard Deviation: ", String.format("%.2f", 0.0));
+						"Standard Deviation: ", String.format("%.2f", standardDev.get()));
 				
 			} catch (InterruptedException | ExecutionException | CancellationException e) {
 				
