@@ -34,6 +34,9 @@ import java.util.stream.IntStream;
 
 public class Server {
 	
+	int coreCount = Runtime.getRuntime().availableProcessors(); // get core count
+	ExecutorService pool = Executors.newFixedThreadPool(coreCount); // instantiate thread pool
+	
     //***************************************************************
     //
     //  Method:       main
@@ -189,7 +192,6 @@ public class Server {
 	public String getStatisticsOrError(int[] data) {
 		
 		String result = "";
-		ExecutorService pool = Executors.newFixedThreadPool(3); // fixed at 3
 		
 		// validation 
 		if(data.length < 2 || data.length > 2) {
@@ -200,30 +202,40 @@ public class Server {
 			result = "The first integer must be less than the second";
 		} else {
 		
-			try {
-				// get statistics
-				Future<List<Integer>> primesList = 	pool.submit(new PrimeCallable(data[0], data[1]));
-				String primes = primesList.get().toString();
-				Future<Integer> sum = pool.submit(new SumCallable(primesList)); 
-				Future<Double> mean = pool.submit(new MeanCallable(primesList));
-				Future<Double> standardDev = pool.submit(new StandardDeviationCallable(primesList, mean));
-				
-				// format results
-				result = String.format("%-21s%s%n%-20s %s%n%-20s %s%n%-20s %s%n",
-						"Primes: ", primes,
-						"Sum: ", sum.get(), 
-						"Mean: ", String.format("%.2f", mean.get()),
-						"Standard Deviation: ", String.format("%.2f", standardDev.get()));
-				
-			} catch (InterruptedException | ExecutionException | CancellationException e) {
-				
-				System.out.println(e.getMessage());
-			}
+			// data is valid, get statistics
+			result = getStatistics(data);
 		}
 		
 		return result;
 		
 	}// end getStatisticsOrError method
+	
+	public String getStatistics(int[] data) {
+		
+		String results = "";
+		
+		try {
+			// get statistics
+			Future<List<Integer>> primesList = pool.submit(new PrimeCallable(data[0], data[1]));
+			Future<Integer> sum = pool.submit(new SumCallable(primesList)); 
+			Future<Double> mean = pool.submit(new MeanCallable(primesList));
+			Future<Double> standardDev = pool.submit(new StandardDeviationCallable(primesList, mean));
+			
+			// format results
+			results = String.format("%-21s%s%n%-20s %s%n%-20s %s%n%-20s %s%n",
+					"Primes: ", primesList.get().toString(),
+					"Sum: ", sum.get(), 
+					"Mean: ", String.format("%.2f", mean.get()),
+					"Standard Deviation: ", String.format("%.2f", standardDev.get()));
+			
+		} catch (InterruptedException | ExecutionException | CancellationException e) {
+			
+			System.out.println(e.getMessage());
+		}
+		
+		return results;
+		
+	}
 	
     //***************************************************************
     //
