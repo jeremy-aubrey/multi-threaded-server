@@ -66,4 +66,4 @@ The data must be:
 ---
 
 Upon a client exiting, the server resumes listening for more clients
-![Screenshot](docs/images/server-resume-listening.png)
+![Screenshot](docs/images/server-resume-listen.png)
