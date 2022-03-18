@@ -8,6 +8,9 @@ statistics to the client:
 - Mean (of primes)
 - Standard Deviation (of primes)
 
+Calculations are delegated to separate threads and results are aggregated, formatted, and returned 
+to the client.
+
 ### To Build:
 Download the java source code and run the following command in the same directory:
 ```powershell
@@ -36,47 +39,31 @@ java Client
 ![Screenshot](docs/images/client-server-connected.png)
 
 ### Use:
-Upload inventory items and cashier data by providing the path to the source file:
+User is prompted with instructions and can enter integers to obtain statistics or enter 'bye' to quit program.
 
-Inventory ([file format](src/Inventory.txt))
-![Screenshot](docs/images/uploaded-inventory.png)
+The data must be:
 
-Cashiers (Optional) ([file format](src/Cashier.txt))
-![Screenshot](docs/images/uploaded-cashiers.png)
+- 2 integers separated by a space
+- The first integer must be less than the second
+- Both integers must be greater than zero
 
-#### Menu:
-The main menu allows the user to navigate and perform the following actions:
+![Screenshot](docs/images/instructions.png)
 
-- 1 Select Items
-- 2 Show Cash Register
-- 3 Clear Cash Register
-- 4 Show Inventory
-- 5 Check Out
-- 6 Quit
+--- 
 
-![Screenshot](docs/images/menu-options.png)
+![Screenshot](docs/images/result.png)
 
 ---
 
-(show available inventory imported from [file](src/Inventory.txt))
-![Screenshot](docs/images/show-inventory.png)
+(validation)
+![Screenshot](docs/images/validation.png)
 
 ---
 
-(purchase an item)
-![Screenshot](docs/images/purchase.png)
+(exit program using 'bye')
+![Screenshot](docs/images/client-closed.png)
 
 ---
 
-(show items added to register list for purchase)
-![Screenshot](docs/images/show-register.png)
-
----
-
-(check out with current register items) 
-![Screenshot](docs/images/checkout.png)
-
----
-
-Upon checkout a reciept file is generated
-![Screenshot](docs/images/reciept.png)
+Upon a client exiting, the server resumes listening for more clients
+![Screenshot](docs/images/server-resume-listening.png)
